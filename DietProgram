@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class DietProgram {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to the Junghoon's Diet Program!");
+
+        // Set the daily calorie goal
+        int dailyCalorieGoal = 1500;
+
+        // Initialize variables to track daily calorie intake
+        int totalCalories = 0;
+        int mealCount = 0;
+
+        // Start the loop to input meals until the user chooses to stop
+        String choice;
+        do {
+            System.out.print("Enter the name of meal: ");
+            String mealName = scanner.nextLine();
+
+            System.out.print("Enter the calorie for " + mealName + ": ");
+            int calorieCount = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            // Update the total calorie count and meal count
+            totalCalories += calorieCount;
+            mealCount++;
+
+            System.out.print("Do you want to add another meal?(Y/N): ");
+            choice = scanner.nextLine();
+        } while (choice.equalsIgnoreCase("Y"));
+
+        // Calculate the average calorie intake per meal
+        double averageCalories = (double) totalCalories / mealCount;
+
+        // Provide feedback to the user
+        System.out.println("\n--- Junghoon's Diet Program Summary ---");
+        System.out.println("Total calories is: " + totalCalories);
+        System.out.println("Average calories per meal: " + averageCalories);
+
+        if (totalCalories > dailyCalorieGoal) {
+            int caloriesOverGoal = totalCalories - dailyCalorieGoal;
+            System.out.println("You exceeded your daily calorie goal by " + caloriesOverGoal + " calories. Time to hit the gym!");
+        } else if (totalCalories < dailyCalorieGoal) {
+            int caloriesUnderGoal = dailyCalorieGoal - totalCalories;
+            System.out.println("You are " + caloriesUnderGoal + " calories under your daily calorie goal. Keep up the good work!");
+        } else {
+            System.out.println("You reached your daily calorie goal. Well done!");
+        }
+
+        // Close the scanner
+        scanner.close();
+    }
+}
